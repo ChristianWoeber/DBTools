@@ -22,7 +22,7 @@ namespace DataBaseDeamon
 
             var cmd = SQLCmd.Select("trading_test", "indices").Fields("NAME,DESCRIPTION,ASSETCLASS_ID");
 
-            foreach (Indices item in cmd.QueryObjects<Indices>())
+            foreach (var item in cmd.QueryObjects<Indices>())
             {
                 lstIndices.Add(item);
             }
