@@ -42,11 +42,12 @@ namespace DataBaseDeamon
             return DbTools.CreateQuery(sqlCmd, Connection, _builder);
         }
 
-        public IEnumerable<object> QueryObjects<T>()
+        public IEnumerable<T> QueryObjects<T>()
         {
             using (var rd = Query(this))
             {
-                while (rd.Read()) yield return ObjectBinder<T>.Create(rd);
+                while (rd.Read())
+                    yield return ObjectMapper<T>.Create(rd);
             }
         }
 

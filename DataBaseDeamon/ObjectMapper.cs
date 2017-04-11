@@ -7,7 +7,7 @@ using System.Reflection;
 
 namespace DataBaseDeamon
 {
-    internal class ObjectBinder<T>
+    internal class ObjectMapper<T>
     {
         internal static T Create(IDataReader rd)
         {
@@ -18,17 +18,12 @@ namespace DataBaseDeamon
                 if (lstAttributes.Count > 0)
                 {
                     var attr = lstAttributes[0].NamedArguments[0].TypedValue.Value.ToString();
-                    //value from DB as object
                     var dbValue = rd[attr];
                     var propertyValue = Convert.ChangeType(dbValue, item.PropertyType);
                     item.SetValue(obj, propertyValue);
-
-                    //yield return new KeyValuePair<string, object>(attr, dbValue);
                 }
             }
             return obj;
-
-            //return null;
         }
 
         private static object Parse(Type propertyType, object dbValue)
